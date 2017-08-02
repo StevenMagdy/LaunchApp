@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="pref_launchesNumber_labels">
+		<item>@string/five_numeric</item>
+		<item>@string/ten_numeric</item>
+		<item>@string/fifteen_numeric</item>
+		<item>@string/twenty_numeric</item>
+	</string-array>
+
+	<string-array name="pref_launchesNumber_values">
+		<item>@string/five_numeric</item>
+		<item>@string/ten_numeric</item>
+		<item>@string/fifteen_numeric</item>
+		<item>@string/twenty_numeric</item>
+	</string-array>
+</resources>

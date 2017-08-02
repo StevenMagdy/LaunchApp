@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">LaunchApp</string>
+	<string name="app_name">LaunchApp</string>
+
+	<string name="pref_launchesNumber_key">pref_launchesNumber</string>
+	<string name="pref_launchesNumber_title">Upcoming Launches</string>
+	<string name="pref_launchesNumber_dialogTitle">@string/pref_launchesNumber_title</string>
+	<string name="five_numeric">5</string>
+	<string name="ten_numeric">10</string>
+	<string name="fifteen_numeric">15</string>
+	<string name="twenty_numeric">20</string>
+
 </resources>
