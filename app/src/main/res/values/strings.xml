@@ -1,6 +1,24 @@
 <resources>
 	<string name="app_name">LaunchApp</string>
 
+	<string name="upcoming_activity_title">Upcoming Launches</string>
+
+	<string name="net_label">Net</string>
+	<string name="window_start_label">Window Start</string>
+	<string name="window_end_label">Window End</string>
+
+	<string name="not_confirmed">Not Confirmed</string>
+
+	<string name="msg_connection_error">Connection Error</string>
+
+	<string name="status_launch_go">Launch is GO</string>
+	<string name="status_launch_no_go">Launch is NO-GO</string>
+	<string name="status_launch_success">Launch was a success</string>
+	<string name="status_launch_failed">Launch failed</string>
+	<string name="status_launch_unknown">Unknown Launch Status</string>
+
+	<string name="menu_settings_title">Settings</string>
+
 	<string name="pref_launchesNumber_key">pref_launchesNumber</string>
 	<string name="pref_launchesNumber_title">Upcoming Launches</string>
 	<string name="pref_launchesNumber_dialogTitle">@string/pref_launchesNumber_title</string>

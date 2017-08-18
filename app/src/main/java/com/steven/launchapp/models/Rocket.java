@@ -9,8 +9,8 @@ public class Rocket {
 	@SerializedName("id") private int id;
 	@SerializedName("name") private String name;
 	@SerializedName("configuration") private String configuration;
-	@SerializedName("familyname") private String familyName;
-	@SerializedName("agencies") private List<Agency> agencies;
+	@SerializedName("defaultPads") private String defaultPads;
+	@SerializedName("family") private RocketFamily rocketFamily;
 	@SerializedName("wikiURL") private String wikiURL;
 	@SerializedName("infoURLs") private List<String> infoURLs;
 	@SerializedName("imageSizes") private List<Integer> imageSizes;
@@ -40,20 +40,20 @@ public class Rocket {
 		this.configuration = configuration;
 	}
 
-	public String getFamilyName() {
-		return familyName;
+	public String getDefaultPads() {
+		return defaultPads;
 	}
 
-	public void setFamilyName(String familyName) {
-		this.familyName = familyName;
+	public void setDefaultPads(String defaultPads) {
+		this.defaultPads = defaultPads;
 	}
 
-	public List<Agency> getAgencies() {
-		return agencies;
+	public RocketFamily getRocketFamily() {
+		return rocketFamily;
 	}
 
-	public void setAgencies(List<Agency> agencies) {
-		this.agencies = agencies;
+	public void setRocketFamily(RocketFamily rocketFamily) {
+		this.rocketFamily = rocketFamily;
 	}
 
 	public String getWikiURL() {

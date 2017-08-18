@@ -6,7 +6,7 @@
 		android:dialogTitle="@string/pref_launchesNumber_dialogTitle"
 		android:entries="@array/pref_launchesNumber_labels"
 		android:entryValues="@array/pref_launchesNumber_values"
-		android:key="pref_launchesNumber"
+		android:key="@string/pref_launchesNumber_key"
 		android:title="@string/pref_launchesNumber_title"/>
 
 </PreferenceScreen>

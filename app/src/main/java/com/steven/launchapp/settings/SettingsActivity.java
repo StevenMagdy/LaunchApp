@@ -1,9 +1,13 @@
-package com.steven.launchapp;
+package com.steven.launchapp.settings;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import com.steven.launchapp.R;
 
 public class SettingsActivity extends AppCompatActivity {
+
+	private static final String TAG = SettingsActivity.class.getName();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

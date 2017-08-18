@@ -17,7 +17,7 @@ public class Launch {
 	@SerializedName("isostart") private String windowStartISO;
 	@SerializedName("isoend") private String windowEndISO;
 	@SerializedName("isonet") private String netISO;
-	@SerializedName("status") private int status;
+	@SerializedName("status") private int statusCode;
 	@SerializedName("tbdtime") private int tbdTime;
 	@SerializedName("vidURLs") private List<String> vidURLs;
 	@SerializedName("infoURLs") private List<String> infoURLs;
@@ -118,12 +118,12 @@ public class Launch {
 		this.netISO = netISO;
 	}
 
-	public int getStatus() {
-		return status;
+	public int getStatusCode() {
+		return statusCode;
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
+	public void setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
 	}
 
 	public int getTbdTime() {

@@ -1,12 +1,14 @@
-package com.steven.launchapp;
+package com.steven.launchapp.upcoming;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.steven.launchapp.R;
 import com.steven.launchapp.models.Launch;
 import com.steven.launchapp.utils.Utils;
 
@@ -15,13 +17,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class LaunchAdapter extends RecyclerView.Adapter<LaunchAdapter.LaunchHolder> {
+class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.LaunchHolder> {
+
+	private static final String TAG = UpcomingAdapter.class.getSimpleName();
 
 	private List<Launch> launches;
 	private Context context;
 	private OnItemClickListener onItemClickListener;
 	private OnItemLongClickListener onItemLongClickListener;
-
 
 	interface OnItemClickListener {
 
@@ -33,8 +36,7 @@ public class LaunchAdapter extends RecyclerView.Adapter<LaunchAdapter.LaunchHold
 		boolean onItemLongClick(int position);
 	}
 
-	LaunchAdapter(List<Launch> launches, Context context) {
-		this.launches = launches;
+	UpcomingAdapter(Context context) {
 		this.context = context;
 	}
 
@@ -46,18 +48,19 @@ public class LaunchAdapter extends RecyclerView.Adapter<LaunchAdapter.LaunchHold
 
 	@Override
 	public void onBindViewHolder(LaunchHolder launchHolder, int i) {
-		launchHolder.nameTextView.setText(launches.get(i).getName());
+		Launch currentLaunch = launches.get(i);
+		launchHolder.nameTextView.setText(currentLaunch.getName());
 		try {
-			Date date = launchHolder.dateParserFormat.parse(launches.get(i).getNet());
-			String notConfirmed = " (Not Confirmed)";
-			launchHolder.dateTextView.setText(launchHolder.dateFormat.format(date).trim());
-			if (launches.get(i).getTbdDate() == 1) launchHolder.dateTextView.append(notConfirmed);
-			launchHolder.timeTextView.setText(launchHolder.timeFormat.format(date).trim());
-			if (launches.get(i).getTbdTime() == 1) launchHolder.timeTextView.append(notConfirmed);
+			Date date = launchHolder.dateParserFormat.parse(currentLaunch.getNet());
+			String dateString = launchHolder.dateFormat.format(date).trim();
+			if (currentLaunch.getTbdDate() == 1) dateString += launchHolder.notConfirmed;
+			launchHolder.dateTextView.setText(dateString);
+			String timeString = launchHolder.timeFormat.format(date).trim();
+			if (currentLaunch.getTbdTime() == 1) timeString += launchHolder.notConfirmed;
+			launchHolder.timeTextView.setText(timeString);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			Log.e(TAG, "Parsing Date Error", e);
 		}
-
 	}
 
 	void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -89,7 +92,7 @@ public class LaunchAdapter extends RecyclerView.Adapter<LaunchAdapter.LaunchHold
 		notifyDataSetChanged();
 	}
 
-	public Launch getLaunch(int position) {
+	Launch getLaunch(int position) {
 		return launches.get(position);
 	}
 
@@ -102,17 +105,19 @@ public class LaunchAdapter extends RecyclerView.Adapter<LaunchAdapter.LaunchHold
 		private SimpleDateFormat dateParserFormat;
 		private SimpleDateFormat dateFormat;
 		private SimpleDateFormat timeFormat;
+		private String notConfirmed;
 
 		private LaunchHolder(View itemView) {
 			super(itemView);
-			nameTextView = (TextView) itemView.findViewById(R.id.textView_name);
-			dateTextView = (TextView) itemView.findViewById(R.id.textView_date);
-			timeTextView = (TextView) itemView.findViewById(R.id.textView_time);
-			dateParserFormat = new SimpleDateFormat("MMM d, yyyy HH:mm:ss Z", Utils
-					.getCurrentLocale(context));
-			// dateParserFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+			nameTextView = itemView.findViewById(R.id.textView_name);
+			dateTextView = itemView.findViewById(R.id.textView_date);
+			timeTextView = itemView.findViewById(R.id.textView_time);
+			dateParserFormat =
+					new SimpleDateFormat("MMM d, yyyy HH:mm:ss Z", Utils.getCurrentLocale
+							(context));
 			dateFormat = new SimpleDateFormat("yyyy-MM-dd", Utils.getCurrentLocale(context));
 			timeFormat = new SimpleDateFormat("HH:mm:ss", Utils.getCurrentLocale(context));
+			notConfirmed = String.format(" (%s)", context.getString(R.string.not_confirmed));
 			itemView.setOnClickListener(this);
 			itemView.setOnLongClickListener(this);
 		}
