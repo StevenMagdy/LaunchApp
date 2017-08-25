@@ -27,11 +27,13 @@ public class MissionFragment extends BaseFragment implements MissionContract.Vie
 	@BindView(R.id.progressBar) ProgressBar progressBar;
 	@Inject LaunchLibraryAPI launchLibraryAPI;
 
-	MissionContract.Presenter presenter;
-	Unbinder unbinder;
+	private MissionContract.Presenter presenter;
+	private Unbinder unbinder;
 
-	public static MissionFragment getInstance() {
-		return new MissionFragment();
+	public static MissionFragment getInstance(Bundle bundle) {
+		MissionFragment missionFragment = new MissionFragment();
+		missionFragment.setArguments(bundle);
+		return missionFragment;
 	}
 
 	@Override

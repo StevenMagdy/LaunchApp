@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -45,11 +46,10 @@ public class UpcomingActivity extends BaseActivity implements UpcomingContract.V
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_upcoming);
 		ButterKnife.bind(this);
-		setSupportActionBar(findViewById(R.id.toolbar));
-		if (getSupportActionBar() != null) {
-			getSupportActionBar().setTitle(R.string.upcoming_activity_title);
-		}
 		((MyApp) getApplication()).getNetworkComponent().inject(this);
+		setSupportActionBar(findViewById(R.id.toolbar));
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) setupActionBar(actionBar);
 		presenter = new UpcomingPresenter(launchLibraryAPI);
 		String launchesNumber =
 				sharedPreferences.getString(getString(R.string.pref_launchesNumber_key), getString
@@ -119,5 +119,9 @@ public class UpcomingActivity extends BaseActivity implements UpcomingContract.V
 	@Override
 	public void showConnectionError() {
 		Toast.makeText(this, R.string.msg_connection_error, Toast.LENGTH_SHORT).show();
+	}
+
+	private void setupActionBar(ActionBar actionBar) {
+		actionBar.setTitle(R.string.upcoming_title);
 	}
 }

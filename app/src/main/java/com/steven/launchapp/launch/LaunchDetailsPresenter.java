@@ -62,7 +62,7 @@ class LaunchDetailsPresenter implements LaunchContract.Presenter {
 			view.showWindowStart(simpleDateFormat.parse(launch.getWindowStart()));
 			view.showWindowEnd(simpleDateFormat.parse(launch.getWindowEnd()));
 		} catch (ParseException e) {
-			e.printStackTrace();
+			Log.e(TAG,"Date Parsing Error",e);
 		}
 	}
 }

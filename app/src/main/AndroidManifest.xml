@@ -13,14 +13,28 @@
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
-		<activity android:name=".upcoming.UpcomingActivity">
+		<activity
+			android:name=".upcoming.UpcomingActivity"
+			android:launchMode="singleTop">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-		<activity android:name=".settings.SettingsActivity"/>
-		<activity android:name=".launch.LaunchActivity"/>
+		<activity
+			android:name=".launch.LaunchActivity"
+			android:parentActivityName=".upcoming.UpcomingActivity">
+			<meta-data
+				android:name="android.support.PARENT_ACTIVITY"
+				android:value=".upcoming.UpcomingActivity"/>
+		</activity>
+		<activity
+			android:name=".settings.SettingsActivity"
+			android:parentActivityName=".upcoming.UpcomingActivity">
+			<meta-data
+				android:name="android.support.PARENT_ACTIVITY"
+				android:value=".upcoming.UpcomingActivity"/>
+		</activity>
 	</application>
 
 </manifest>

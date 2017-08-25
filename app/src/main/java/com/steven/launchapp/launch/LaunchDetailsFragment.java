@@ -37,8 +37,10 @@ public class LaunchDetailsFragment extends BaseFragment implements LaunchContrac
 	private LaunchContract.Presenter presenter;
 	private Unbinder unbinder;
 
-	public static LaunchDetailsFragment getInstance() {
-		return new LaunchDetailsFragment();
+	public static LaunchDetailsFragment getInstance(Bundle bundle) {
+		LaunchDetailsFragment launchDetailsFragment = new LaunchDetailsFragment();
+		launchDetailsFragment.setArguments(bundle);
+		return launchDetailsFragment;
 	}
 
 	@Override

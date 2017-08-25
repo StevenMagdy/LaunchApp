@@ -32,11 +32,13 @@ public class RocketFragment extends BaseFragment implements RocketContract.View 
 
 	@Inject LaunchLibraryAPI launchLibraryAPI;
 
-	RocketContract.Presenter presenter;
-	Unbinder unbinder;
+	private RocketContract.Presenter presenter;
+	private Unbinder unbinder;
 
-	public static RocketFragment getInstance() {
-		return new RocketFragment();
+	public static RocketFragment getInstance(Bundle bundle) {
+		RocketFragment rocketFragment = new RocketFragment();
+		rocketFragment.setArguments(bundle);
+		return rocketFragment;
 	}
 
 	@Override
