@@ -22,6 +22,7 @@ class RocketPresenter implements RocketContract.Presenter {
 
 	@Override
 	public void loadDetails(boolean forceUpdate, int rocketID) {
+		view.setProgress(true);
 		disposable = launchLibraryAPI.getRocket(rocketID)
 				.compose(RxUtils.singleIOToMainThreadScheduler())
 				.map(rocketsResult -> rocketsResult.getRockets().get(0))

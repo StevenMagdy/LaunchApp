@@ -74,7 +74,7 @@ public class RocketFragment extends BaseFragment implements RocketContract.View 
 	@Override
 	public void setUserVisibleHint(boolean isVisibleToUser) {
 		super.setUserVisibleHint(isVisibleToUser);
-		if (isVisibleToUser) onResume();
+		if (isVisibleToUser && getView() != null) onResume();
 	}
 
 	@Override

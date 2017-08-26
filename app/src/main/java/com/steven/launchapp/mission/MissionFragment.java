@@ -69,7 +69,7 @@ public class MissionFragment extends BaseFragment implements MissionContract.Vie
 	@Override
 	public void setUserVisibleHint(boolean isVisibleToUser) {
 		super.setUserVisibleHint(isVisibleToUser);
-		if (isVisibleToUser) onResume();
+		if (isVisibleToUser && getView() != null) onResume();
 	}
 
 	@Override

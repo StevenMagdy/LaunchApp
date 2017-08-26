@@ -23,6 +23,7 @@ class MissionPresenter implements MissionContract.Presenter {
 
 	@Override
 	public void loadDetails(boolean forceUpdate, int missionID) {
+		view.setProgress(true);
 		disposable = launchLibraryAPI.getMission(missionID)
 				.compose(singleIOToMainThreadScheduler())
 				.map(missionsResult -> missionsResult.getMissions().get(0))
