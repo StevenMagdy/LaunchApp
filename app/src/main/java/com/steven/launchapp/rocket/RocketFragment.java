@@ -1,10 +1,14 @@
 package com.steven.launchapp.rocket;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,9 +30,12 @@ import butterknife.Unbinder;
 
 public class RocketFragment extends BaseFragment implements RocketContract.View {
 
-	@BindView(R.id.tv_rocket_name) TextView rocketTextView;
+	@BindView(R.id.tv_rocket_name) TextView rocketNameTextView;
+	@BindView(R.id.tv_rocket_family) TextView rocketFamilyTextView;
 	@BindView(R.id.progressBar) ProgressBar progressBar;
 	@BindView(R.id.image_rocket) ImageView rocketImage;
+	@BindView(R.id.button_site) Button siteButton;
+	@BindView(R.id.button_wiki) Button wikiButton;
 
 	@Inject LaunchLibraryAPI launchLibraryAPI;
 
@@ -90,7 +97,36 @@ public class RocketFragment extends BaseFragment implements RocketContract.View 
 
 	@Override
 	public void showRocketName(String name) {
-		rocketTextView.setText(name);
+		rocketNameTextView.setText(name);
+	}
+
+	@Override
+	public void showRocketFamily(String name) {
+		rocketFamilyTextView.setText(name + " Family");
+	}
+
+	@Override
+	public void showRocketSite(String url) {
+		siteButton.setEnabled(true);
+		siteButton.setOnClickListener(view -> {
+			CustomTabsIntent customTabsIntent =
+					new CustomTabsIntent.Builder().setToolbarColor(ContextCompat.getColor
+							(getActivity(), R.color.colorPrimary))
+							.build();
+			customTabsIntent.launchUrl(getActivity(), Uri.parse(url));
+		});
+	}
+
+	@Override
+	public void showRocketWiki(String url) {
+		wikiButton.setEnabled(true);
+		wikiButton.setOnClickListener(view -> {
+			CustomTabsIntent customTabsIntent =
+					new CustomTabsIntent.Builder().setToolbarColor(ContextCompat.getColor
+							(getActivity(), R.color.colorPrimary))
+							.build();
+			customTabsIntent.launchUrl(getActivity(), Uri.parse(url));
+		});
 	}
 
 	@Override

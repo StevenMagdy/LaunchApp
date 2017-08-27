@@ -50,6 +50,15 @@ class RocketPresenter implements RocketContract.Presenter {
 	private void showDetails(Rocket rocket) {
 		view.showRocketName(rocket.getName());
 
+		if (rocket.getRocketFamily() != null) {
+			view.showRocketFamily(rocket.getRocketFamily().getName());
+		}
+
+		if (rocket.getWikiURL() != null) view.showRocketWiki(rocket.getWikiURL());
+		if (rocket.getInfoURLs() != null && rocket.getInfoURLs().size() > 0) {
+			view.showRocketSite(rocket.getInfoURLs().get(0));
+		}
+
 		String imageURL = rocket.getImageURL().replace(String.valueOf(rocket.getImageSizes()
 				.get(rocket.getImageSizes().size() - 1)), String.valueOf(rocket.getImageSizes()
 				.get(rocket.getImageSizes().size() / 2)));

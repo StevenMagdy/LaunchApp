@@ -8,6 +8,12 @@ public interface RocketContract {
 
 		void showRocketName(String name);
 
+		void showRocketFamily(String name);
+
+		void showRocketSite(String url);
+
+		void showRocketWiki(String url);
+
 		void showRocketImage(String imageURL);
 
 		void showConnectionError();

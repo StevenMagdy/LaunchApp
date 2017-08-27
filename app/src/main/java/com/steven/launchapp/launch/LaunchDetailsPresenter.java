@@ -3,11 +3,14 @@ package com.steven.launchapp.launch;
 import android.util.Log;
 
 import com.steven.launchapp.models.Launch;
+import com.steven.launchapp.models.Mission;
+import com.steven.launchapp.models.Rocket;
 import com.steven.launchapp.network.LaunchLibraryAPI;
 import com.steven.launchapp.utils.RxUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import io.reactivex.disposables.Disposable;
 
@@ -51,8 +54,12 @@ class LaunchDetailsPresenter implements LaunchContract.Presenter {
 	}
 
 	private void showDetails(Launch launch) {
-		view.setRocketID(launch.getRocket().getId());
-		view.setMissionID(launch.getMissions().get(0).getId());
+		Rocket rocket = launch.getRocket();
+		if (rocket != null) view.setRocketID(rocket.getId());
+		List<Mission> missionList = launch.getMissions();
+		if (missionList != null && missionList.size() > 0) {
+			view.setMissionID(missionList.get(0).getId());
+		}
 		view.showName(launch.getName());
 
 		view.showStatus(launch.getStatusCode());
@@ -62,7 +69,7 @@ class LaunchDetailsPresenter implements LaunchContract.Presenter {
 			view.showWindowStart(simpleDateFormat.parse(launch.getWindowStart()));
 			view.showWindowEnd(simpleDateFormat.parse(launch.getWindowEnd()));
 		} catch (ParseException e) {
-			Log.e(TAG,"Date Parsing Error",e);
+			Log.e(TAG, "Date Parsing Error", e);
 		}
 	}
 }
