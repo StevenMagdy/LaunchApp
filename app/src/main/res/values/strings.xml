@@ -10,6 +10,8 @@
 	<string name="window_start_label">Window Start</string>
 	<string name="window_end_label">Window End</string>
 
+	<string name="watch_live">Watch Live</string>
+
 	<string name="not_confirmed">Not Confirmed</string>
 
 	<string name="msg_connection_error">Connection Error</string>

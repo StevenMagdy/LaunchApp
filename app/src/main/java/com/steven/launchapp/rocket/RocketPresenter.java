@@ -26,10 +26,7 @@ class RocketPresenter implements RocketContract.Presenter {
 		disposable = launchLibraryAPI.getRocket(rocketID)
 				.compose(RxUtils.singleIOToMainThreadScheduler())
 				.map(rocketsResult -> rocketsResult.getRockets().get(0))
-				.subscribe(rocket -> {
-					view.setProgress(false);
-					showDetails(rocket);
-				}, throwable -> {
+				.subscribe(this::showDetails, throwable -> {
 					Log.e(TAG, "Observable Subscribing Error", throwable);
 					view.setProgress(false);
 					view.showConnectionError();
@@ -48,6 +45,8 @@ class RocketPresenter implements RocketContract.Presenter {
 	}
 
 	private void showDetails(Rocket rocket) {
+		if (view == null) return;
+		view.setProgress(false);
 		view.showRocketName(rocket.getName());
 
 		if (rocket.getRocketFamily() != null) {

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class LaunchDetailsFragment extends BaseFragment implements LaunchContrac
 	@BindView(R.id.textView_net) TextView netTextView;
 	@BindView(R.id.textView_window_start) TextView windowStartTextView;
 	@BindView(R.id.textView_window_end) TextView windowEndTextView;
+	@BindView(R.id.button_video) Button videoButton;
 	@Inject LaunchLibraryAPI launchLibraryAPI;
 
 	private LaunchContract.Presenter presenter;
@@ -64,11 +66,11 @@ public class LaunchDetailsFragment extends BaseFragment implements LaunchContrac
 	public void onResume() {
 		super.onResume();
 		presenter.attachView(this);
-		if (Utils.isNetworkAvailable(getContext())) {
+		//if (Utils.isNetworkAvailable(getContext())) {
 			presenter.loadDetails(false, ((LaunchActivity) getActivity()).getLaunchID());
-		} else {
-			showConnectionError();
-		}
+		//} else {
+		//	showConnectionError();
+		//}
 	}
 
 	@Override
@@ -106,6 +108,11 @@ public class LaunchDetailsFragment extends BaseFragment implements LaunchContrac
 		SimpleDateFormat simpleDateFormat =
 				new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Utils.getCurrentLocale(getContext()));
 		windowEndTextView.setText(simpleDateFormat.format(date));
+	}
+
+	@Override
+	public void showLiveUrl(String url) {
+		videoButton.setOnClickListener(view -> Utils.launchURL(getActivity(), url));
 	}
 
 	@Override

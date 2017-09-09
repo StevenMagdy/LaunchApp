@@ -3,14 +3,11 @@ package com.steven.launchapp.launch;
 import android.util.Log;
 
 import com.steven.launchapp.models.Launch;
-import com.steven.launchapp.models.Mission;
-import com.steven.launchapp.models.Rocket;
 import com.steven.launchapp.network.LaunchLibraryAPI;
 import com.steven.launchapp.utils.RxUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import io.reactivex.disposables.Disposable;
 
@@ -32,10 +29,7 @@ class LaunchDetailsPresenter implements LaunchContract.Presenter {
 		disposable = launchLibraryAPI.getLaunchDetails(launchID)
 				.compose(RxUtils.singleIOToMainThreadScheduler())
 				.map(launchesResult -> launchesResult.getLaunches().get(0))
-				.subscribe(launch -> {
-					view.setProgress(false);
-					showDetails(launch);
-				}, throwable -> {
+				.subscribe(this::showDetails, throwable -> {
 					Log.e(TAG, "Observable Subscribing Error", throwable);
 					view.setProgress(false);
 					view.showConnectionError();
@@ -54,11 +48,14 @@ class LaunchDetailsPresenter implements LaunchContract.Presenter {
 	}
 
 	private void showDetails(Launch launch) {
-		Rocket rocket = launch.getRocket();
-		if (rocket != null) view.setRocketID(rocket.getId());
-		List<Mission> missionList = launch.getMissions();
-		if (missionList != null && missionList.size() > 0) {
-			view.setMissionID(missionList.get(0).getId());
+		if (view == null) return;
+		view.setProgress(false);
+		if (launch.getRocket() != null) view.setRocketID(launch.getRocket().getId());
+		if (launch.getMissions() != null && launch.getMissions().size() > 0) {
+			view.setMissionID(launch.getMissions().get(0).getId());
+		}
+		if (launch.getVidURLs() != null && launch.getVidURLs().size() > 0) {
+			view.showLiveUrl(launch.getVidURLs().get(0));
 		}
 		view.showName(launch.getName());
 

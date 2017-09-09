@@ -29,7 +29,6 @@ import butterknife.ButterKnife;
 
 import static com.steven.launchapp.utils.Utils.LAUNCH_ID_KEY;
 import static com.steven.launchapp.utils.Utils.LAUNCH_NAME_KEY;
-import static com.steven.launchapp.utils.Utils.isNetworkAvailable;
 
 public class UpcomingActivity extends BaseActivity implements UpcomingContract.View {
 
@@ -75,11 +74,11 @@ public class UpcomingActivity extends BaseActivity implements UpcomingContract.V
 		String launchesNumber =
 				sharedPreferences.getString(getString(R.string.pref_launchesNumber_key), getString
 						(R.string.ten_numeric));
-		if (isNetworkAvailable(this)) {
-			presenter.loadLaunches(false, Integer.parseInt(launchesNumber));
-		} else {
-			showConnectionError();
-		}
+		//if (isNetworkAvailable(this)) {
+		presenter.loadLaunches(false, Integer.parseInt(launchesNumber));
+		//} else {
+		//	showConnectionError();
+		//}
 	}
 
 	@Override

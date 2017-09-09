@@ -23,6 +23,8 @@ import butterknife.Unbinder;
 
 public class MissionFragment extends BaseFragment implements MissionContract.View {
 
+	@BindView(R.id.tv_mission_name) TextView nameTextView;
+	@BindView(R.id.tv_mission_type) TextView typeTextView;
 	@BindView(R.id.tv_mission_desc) TextView descriptionTextView;
 	@BindView(R.id.progressBar) ProgressBar progressBar;
 	@Inject LaunchLibraryAPI launchLibraryAPI;
@@ -81,6 +83,16 @@ public class MissionFragment extends BaseFragment implements MissionContract.Vie
 	@Override
 	public void setProgress(boolean inProgress) {
 		progressBar.setVisibility(inProgress ? View.VISIBLE : View.INVISIBLE);
+	}
+
+	@Override
+	public void showMissionName(String name) {
+		nameTextView.setText(name);
+	}
+
+	@Override
+	public void showMissionType(String type) {
+		typeTextView.setText(type);
 	}
 
 	@Override

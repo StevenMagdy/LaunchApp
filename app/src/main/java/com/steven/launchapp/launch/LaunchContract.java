@@ -16,6 +16,8 @@ interface LaunchContract {
 
 		void showWindowEnd(Date date);
 
+		void showLiveUrl(String url);
+
 		void setRocketID(int id);
 
 		void setMissionID(int id);

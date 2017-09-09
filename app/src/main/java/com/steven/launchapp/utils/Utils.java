@@ -3,7 +3,12 @@ package com.steven.launchapp.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
+import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.content.ContextCompat;
+
+import com.steven.launchapp.R;
 
 import java.util.Locale;
 
@@ -37,5 +42,13 @@ public final class Utils {
 			//noinspection deprecation
 			return context.getResources().getConfiguration().locale;
 		}
+	}
+
+	public static void launchURL(Context context, String url) {
+		CustomTabsIntent customTabsIntent =
+				new CustomTabsIntent.Builder().setToolbarColor(ContextCompat.getColor(context, R
+						.color.colorPrimary))
+						.build();
+		customTabsIntent.launchUrl(context, Uri.parse(url));
 	}
 }

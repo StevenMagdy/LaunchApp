@@ -1,10 +1,7 @@
 package com.steven.launchapp.rocket;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.customtabs.CustomTabsIntent;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +18,7 @@ import com.steven.launchapp.R;
 import com.steven.launchapp.base.BaseFragment;
 import com.steven.launchapp.launch.LaunchActivity;
 import com.steven.launchapp.network.LaunchLibraryAPI;
+import com.steven.launchapp.utils.Utils;
 
 import javax.inject.Inject;
 
@@ -108,25 +106,13 @@ public class RocketFragment extends BaseFragment implements RocketContract.View 
 	@Override
 	public void showRocketSite(String url) {
 		siteButton.setEnabled(true);
-		siteButton.setOnClickListener(view -> {
-			CustomTabsIntent customTabsIntent =
-					new CustomTabsIntent.Builder().setToolbarColor(ContextCompat.getColor
-							(getActivity(), R.color.colorPrimary))
-							.build();
-			customTabsIntent.launchUrl(getActivity(), Uri.parse(url));
-		});
+		siteButton.setOnClickListener(view -> Utils.launchURL(getActivity(), url));
 	}
 
 	@Override
 	public void showRocketWiki(String url) {
 		wikiButton.setEnabled(true);
-		wikiButton.setOnClickListener(view -> {
-			CustomTabsIntent customTabsIntent =
-					new CustomTabsIntent.Builder().setToolbarColor(ContextCompat.getColor
-							(getActivity(), R.color.colorPrimary))
-							.build();
-			customTabsIntent.launchUrl(getActivity(), Uri.parse(url));
-		});
+		wikiButton.setOnClickListener(view -> Utils.launchURL(getActivity(), url));
 	}
 
 	@Override

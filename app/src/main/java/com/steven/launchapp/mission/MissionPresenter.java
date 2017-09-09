@@ -27,10 +27,7 @@ class MissionPresenter implements MissionContract.Presenter {
 		disposable = launchLibraryAPI.getMission(missionID)
 				.compose(singleIOToMainThreadScheduler())
 				.map(missionsResult -> missionsResult.getMissions().get(0))
-				.subscribe(mission -> {
-					view.setProgress(false);
-					showMission(mission);
-				}, throwable -> {
+				.subscribe(this::showMission, throwable -> {
 					Log.e(TAG, "Observable Subscribing Error", throwable);
 					view.setProgress(false);
 					view.showConnectionError();
@@ -49,6 +46,16 @@ class MissionPresenter implements MissionContract.Presenter {
 	}
 
 	private void showMission(Mission mission) {
-		view.showMissionDescription(mission.getDescription());
+		if (view == null) return;
+		view.setProgress(false);
+		if (mission.getName() != null) {
+			view.showMissionName(mission.getName());
+		}
+		if (mission.getTypeName() != null) {
+			view.showMissionType(mission.getTypeName());
+		}
+		if (mission.getDescription() != null) {
+			view.showMissionDescription(mission.getDescription());
+		}
 	}
 }

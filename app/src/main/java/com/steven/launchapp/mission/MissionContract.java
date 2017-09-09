@@ -1,10 +1,14 @@
 package com.steven.launchapp.mission;
 
-public interface MissionContract {
+ interface MissionContract {
 
 	interface View {
 
 		void setProgress(boolean inProgress);
+
+		void showMissionName(String name);
+
+		void showMissionType(String type);
 
 		void showMissionDescription(String description);
 
