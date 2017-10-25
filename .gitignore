@@ -11,6 +11,9 @@ Desktop.ini
 *.iml
 .idea/
 
+# SublimeText
+*.sublime-workspace
+
 # Java class files
 *.class
 
